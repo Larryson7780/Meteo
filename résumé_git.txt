@@ -1,0 +1,276 @@
+VCS Version Control System
+
+il y a 2 types:
+- Logiciel de gestion de version décentralisé ( Git, Mercurial)
+- Logiciel de gestion de version centralisé ( Subversion )
+Doit être connecté tous le temps au dépot.
+
+site: git-scm.com
+
+git config --global user.name "My username": Le nom qui s'affiche à chaque commit
+git config --global user.email "My email": Mon email
+
+
+cd /home/yrral/Bureau/linux/ && mkdir git && cd git
+
+touch README.md	( écrire dans le fichier README.md )
+
+git init	(dossier .git créé)
+
+git add README.md ( ajouter README.md dans le prochain commit )
+
+git commit -m "first commit" ( Sur la branche master, je vais pousser un fichier avec l'ensemble de toute les modifications dans le serveur )
+
+git branch -M main	( J'ajoute ma branche par défaut / normalement master mais maintenant c'est main )
+
+git remote add origin git@github.com:formation977/formation-git.git( je définis mon URL github: c'est l'URL pour m'amener vers l'ensemble de mes fichiers git )
+
+git push -u origin main	( Envoyer toutes les modifiations sur le serveur / pousser la nouvelle branche)
+
+Fichier README.md:
+
+# titre de niveau 1
+
+## titre de niveau 2
+
++ puce SANS ORDRE
+
+1. puce AVEC ORDER (1, 2, 3, ...)
+
+**GIT**	le mot GIT va être en GRAS
+
+*GIT* le mot GIT va être en italic
+
+--- ligne horizontal
+
+```html (type du fichier)
+
+
+```
+
+[nom](www.lien.com)
+
+**************************
+
+setting → ssh → new_ssh_key	( clé publique ) ??
+
+ssh-keygen ( commande de création de clé [publique et privé] )
+OÙ on met le fichier, quel est le NOM du fichier
+
+
+
+*******************************************
+
+
+git status	( Afficher ce qui se passe: fichier modifié / fichier créé / fichier supprimé )
+
+git diff	( Affiche l'ensemble des modifications qu'il y a entre mes fichiers en locals et mes fichiers distants )
+
+
+
+
+
+--------------------
+
+touch fichier.txt
+
+vim fichier.txt	(bla bla bla)
+
+git status	( fichier créé localement )
+
+git add fichier.txt	( fichier.txt peut être commiter maintenant	[git commit -m "message"] ) // Zay fichiers natao git add sy git commit ihany no mety atao git push
+
+git status	( Affiche les fichier créé ou modifié et permet de savoir qui peuvent être git push  )
+
+git add	( Les modifications et les fichiers créés peuvent êtres git commit )
+
+**********************************************
+
+
+
+
+
+.gitignore ( on met dedans tous le fichiers qu'on veut que git ignore. Git ne push, ne fait pas apparaître, ignore les fichiers qui sont dans ce fichier )
+
+*.log	( fichier avec l'extension .log )
+/cache/*	( le contenu du dossier cache )
+
+!/cache/.gitkeep	( ne pas ignoré par git le fichier .gitkeep )
+
+***************************************************************
+
+
+git commit -m "A propos de ce que vous avez fait dans git add"
+OU
+git commit	( Redirigé dans un éditeur de text. Mettre au dessus le grand titre / à la ligne pour la description )
+
+************************************************************************************************************************
+
+git log	(Permet d'afficher tous les log faite depuis le début)
+
+git log -1	( Affiche le dernier log [avec l'identifiant unique du commit] )
+git log -2	( Affiche les 2 derniers commits [avec leur identifiants] )
+
+git log -1 --stat	( nombre d'insertion ou de suppression qui peut y avoir dans le dernier commit )
+
+git log -10 --online	( les 10 derniers commits en une ligne [identifiant & message] )
+
+git log -10 --author "Larry"	( 10 derniers commits faite par Larry )
+
+git log -2 --author "Larry" --after="2021-10-11"	( Les 2 derniers commits faite par Larry après la DATE "2021-10-11" )
+ON PEUT LE FAIRE AUSSI AVEC --before="année-mois-jours"
+
+
+
+********************************************************
+git branch ( Liste les branches )
+
+git branch -v ( Les branches avec le dernier commit associé )
+
+git branch "Nouvelle branche"	( nouvelle branche )
+
+git checkout "Nouvelle branche"	( changer de branche )
+
+touch fichier.html
+nano fichier.html	( hahhaaaa )
+git add fichier.html
+git commit -m "commit de fichier.txt"
+
+// La branche "Nouvelle branche" n'est pas encore sur le serveur distant
+
+git push -u origin "Nouvelle branche"	( "Nouvelle branche" est maintenant sur le serveur distant )
+
+*********************************************************************************************
+
+Ajouter ce qu'il y a sur la branche "Nouvelle branche" dans la branche "main"
+
+git checkout "main"	( On est maintenant sur la branche "main" )
+
+git merge "Nouvelle branche"	( Ajouter tous ce qu'il y a sur "Nouvelle branche" dans "main" )
+// Les modifications ne sont pas encore envoyé sur le serveur distant
+git push
+
+***************************************************************
+
+branche:
+* main
+  Nouvelle branche
+
+
+main:
+	a.txt
+	b.txt
+
+Nouvelle branche:
+	a.txt
+
+---
+
+Ajouter tous les fichiers ainsi que toutes les modifficactions de la branche "main" dans "Nouvelle branche"
+
+git branch "Nouvelle branche"
+git rebase main	// maintenant "main" et "Nouvelle branche" sont les MÊME
+les modifications qui ont été faite sur les fichiers de la branche "main" sont apportées dans la branche "Nouvelle branche"
+
+****************************************************************
+SUPPRESSION D'UNE BRANCHE	( Supprimer localement )
+
+git branch -d NOM_DE_LA_BRANCHE
+
+**************************************************************
+Créer et se positionner sur la nouvelle branche
+git checkout -b "nom_de_la_nouvelle_branche"
+
+
+
+***************************************************
+
+REVENIR À L'ÉTAT PRÉCÉDENT:
+git log	( afficher tous les commits )
+
+git checkout jmoihlgukvhk	( revenir à l'état où nous avons fait le commit de jmoihlgukvhk )
+
+**********************************************************************************************
+
+touch file.html
+vim file.html
+
+a
+	b
+c
+	d
+
+
+ALERTE ALERTE!!
+
+
+<ESC>:wq	( sauvegarde )
+
+Le travail n'est pas encore fini
+J'ai pas encore envie de faire git add
+
+git stash	( sauvegarder les modification )
+git stash list	( liste des sauvegardes faite par git stash )
+
+
+
+Pour appliquer les modifications sauvegardées dans git stash
+git stash pop
+
+puis
+git status	( On voit qu'il y a eu des modifications qui ont été appliquée )
+
+
+*****************************************************************************
+
+Sur un projet dans github	→	Fork	( copie link )
+Aller dans le projet
+créer un dossier
+Entrer dans le dossier
+
+git submodule add link_Fork
+
+Aller dans la racine du projet principal
+
+git add .
+
+git commit -m "submodule..."
+
+git push
+
+Lien entre les 2 projets github
+
+*******************************************
+
+git config --global --edit	( ALIAS )
+
+[user]
+        name = Larryson Joël
+        email = yrralson1@gmail.com
+[init]
+        defaultBranch = main
+[alias]
+        alias = commande
+	   co = checkout	( git co )
+
+*****************************************
+
+git alias
+
+*****************************************
+
+git-flow	( A chercher )
+
+*************************************
+Collaborer ensemble sur un meme projet
+
+Setting → Manage access → Invite a collaborator	( Entrer le nom de l'utilisateur )
+
+
+*************************************************************************
+
+github desktop	( gérer le dépot avec une interface graphique [I y en a d'autres] )
+
+***************************************************
+
+Pour la documentation, www.git-scm.com
